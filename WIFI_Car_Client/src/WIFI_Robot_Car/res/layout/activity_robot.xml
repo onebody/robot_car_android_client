@@ -1,0 +1,93 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:id="@+id/MainFame"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:background="@android:color/background_light"
+        >
+
+    <RelativeLayout
+            android:id="@+id/main_Rl"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@android:color/transparent">
+
+        <ImageView
+                android:id="@+id/btn_motor_up"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:src="@drawable/op_im_up"
+                android:layout_above="@+id/btn_motor_right"
+                android:layout_toLeftOf="@+id/btn_motor_right"/>
+
+        <ImageView
+                android:id="@+id/btn_motor_right"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:src="@drawable/op_im_rigth"
+                android:layout_below="@+id/main_tips"
+                android:layout_alignParentRight="true"/>
+
+        <ImageView
+                android:id="@+id/btn_motor_left"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:src="@drawable/op_im_left"
+                android:layout_alignBottom="@+id/btn_auto_robot"
+                android:layout_toLeftOf="@+id/btn_auto_robot"/>
+
+        <ToggleButton
+                android:id="@+id/btn_auto_robot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="自动"
+                android:layout_alignBottom="@+id/btn_motor_right"
+                android:layout_toLeftOf="@+id/btn_motor_right"/>
+
+        <ImageView
+                android:id="@+id/btn_motor_down"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:src="@drawable/op_im_down"
+                android:layout_below="@+id/btn_auto_robot"
+                android:layout_alignRight="@+id/btn_auto_robot"/>
+
+        <ImageView
+                android:id="@+id/btn_webCam_left"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/op_im_left"
+                android:layout_alignTop="@+id/btn_webCam_right"
+                android:layout_toLeftOf="@+id/btn_webCam_right"/>
+
+        <ImageView
+                android:id="@+id/btn_webCam_right"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/op_im_rigth"
+                android:layout_marginTop="21dp"
+                android:layout_below="@+id/btnSettings"
+                android:layout_alignLeft="@+id/btn_motor_down"/>
+
+        <TextView
+                android:id="@+id/main_tips"
+                android:layout_width="120dp"
+                android:layout_height="60dp"
+                android:text="220km/h"
+                android:textSize="25sp"
+                android:background="@drawable/text"
+                android:layout_alignParentTop="true"
+                android:layout_toLeftOf="@+id/toggleButton1"/>
+
+        <Button
+                android:id="@+id/btnSettings"
+                android:layout_width="120dp"
+                android:layout_height="40dp"
+                android:text="设置中心"
+                android:textSize="20sp"
+                android:textColor="@android:color/white"
+                android:background="@drawable/buttom"
+                android:layout_below="@+id/btn_motor_down"
+                android:layout_alignParentRight="true"/>
+
+    </RelativeLayout>
+</FrameLayout>

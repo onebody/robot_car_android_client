@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="WIFI_Robot_Car">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/WIFI_Car_Client/libs/android-support-v4.jar!/" />
+      <root url="jar://G:/maven/repository/com/onebody/webiopi-java-api/1.0.0/webiopi-java-api-1.0.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
