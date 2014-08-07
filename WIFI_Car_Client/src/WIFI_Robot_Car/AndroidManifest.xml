@@ -27,14 +27,14 @@
                 android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity
                 android:name="com.onebody.wifi_car_client.SettingsDialogActivity"
                 android:label="@string/app_name"
-                android:windowSoftInputMode="adjustResize|stateVisible">
+                android:windowSoftInputMode="adjustResize|stateVisible"
+                android:screenOrientation="landscape">
         </activity>
 
     </application>

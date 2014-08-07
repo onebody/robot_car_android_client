@@ -22,7 +22,12 @@ public class SettingsDialogActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings_dialog);
-
+        EditText txtServer = (EditText) findViewById(R.id.txtServer);
+        txtServer.setText(WebIOPI_Util.webiopi_server);
+        EditText txtUser = (EditText) findViewById(R.id.user);
+        txtUser.setText(WebIOPI_Util.webiopi_username);
+        EditText txtPassword = (EditText) findViewById(R.id.password);
+        txtPassword.setText(WebIOPI_Util.webiopi_password);
         showDialog(0);
     }
 
@@ -66,7 +71,6 @@ public class SettingsDialogActivity extends Activity {
             }
         });
         settingsDialog = builder.create();
-
         return settingsDialog;
     }
 }

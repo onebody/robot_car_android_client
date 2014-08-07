@@ -2,6 +2,8 @@ package com.onebody.wifi_car_client.webiopi_util;
 
 import com.trouch.webiopi.client.devices.digital.NativeGPIO;
 
+import java.math.BigDecimal;
+
 /**
  * 描述：利用 HC_SR04超声波感应器 测距
  *
@@ -20,14 +22,18 @@ public class RangingSensorAPI {
         NativeGPIO gpio = WebIOPI_Util.getDefaultGPIO();
         String args = RangingSensorAPI.beforeTriger + "," + RangingSensorAPI.beforeEcho;
         String res = gpio.callMacro("rangingSensor_Distance", args);
-        return Double.parseDouble(res);
+        BigDecimal bg = new BigDecimal(Double.parseDouble(res));
+        double f1 = bg.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+        return f1;
     }
 
     public static double afterDistance() {
         NativeGPIO gpio = WebIOPI_Util.getDefaultGPIO();
         String args = RangingSensorAPI.afterTriger + "," + RangingSensorAPI.afterEcho;
         String res = gpio.callMacro("rangingSensor_Distance", args);
-        return Double.parseDouble(res);
+        BigDecimal bg = new BigDecimal(Double.parseDouble(res));
+        double f1 = bg.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+        return f1;
     }
 
     public static void main(String args[]) {

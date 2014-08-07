@@ -12,16 +12,20 @@ import com.trouch.webiopi.client.devices.digital.NativeGPIO;
  */
 
 public class WebIOPI_Util {
-    private static String webiopi_server = "192.168.1.101";
-    private static String webiopi_username = "webiopi";
-    private static String webiopi_password = "webiopi";
+    public static String webiopi_server = "192.168.1.102";
+    public static String webiopi_username = "webiopi";
+    public static String webiopi_password = "webiopi";
     private static NativeGPIO gpio = null;
 
     public static NativeGPIO getGPIO(String host, String userName, String password) {
         PiClient client = new PiHttpClient(host, PiHttpClient.DEFAULT_PORT);
         client.setCredentials(userName, password);
-        if (gpio == null)
+        if (gpio == null) {
             gpio = new NativeGPIO(client);
+        }
+        webiopi_server = host;
+        webiopi_username = userName;
+        webiopi_password = password;
         return gpio;
     }
 

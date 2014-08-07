@@ -10,14 +10,38 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.TextView;
 
+import com.onebody.wifi_car_client.webiopi_util.RangingSensorAPI;
 import com.onebody.wifi_car_client.webiopi_util.RobotMotorAPI;
 import com.onebody.wifi_car_client.webiopi_util.StepMotorAPI;
+
+import java.text.SimpleDateFormat;
 
 public class RobotActivity extends Activity {
     private RobotMotorAPI motor = new RobotMotorAPI();
     private StepMotorAPI stepMotor = new StepMotorAPI();
+    private RangingSensorAPI rangingSensor = new RangingSensorAPI();
     private boolean stepMotorIsInited = false;
+    private TextView tvShow;
+
+    // 线程类
+    class ThreadShow implements Runnable {
+        @Override
+        public void run() {
+            // TODO Auto-generated method stub
+            while (true) {
+                try {
+                    Thread.sleep(3000);
+
+                } catch (Exception e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+//                    System.out.println("thread error...");
+                }
+            }
+        }
+    }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -27,11 +51,33 @@ public class RobotActivity extends Activity {
 //        Log.i("测试", str + "\n");
     }
 
+    private boolean checkDistance() {
+        double beforeDistance = rangingSensor.beforeDistance();
+        double afterDistance = rangingSensor.afterDistance();
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+
+//        String tips = "时间: " + simpleDateFormat.format(System.currentTimeMillis()) + "\n";
+        String tips = "前方距离:" + beforeDistance + " CM\n";
+        tips += "后方距离:" + afterDistance + " CM\n";
+        tvShow.setText(tips);
+
+        Log.i("测试", tips + "\n");
+
+        if (beforeDistance < 30 || afterDistance < 30) {
+            motor.stop();
+            return false;
+        }
+        return true;
+    }
+
     @TargetApi(Build.VERSION_CODES.GINGERBREAD)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_robot);
+
+        tvShow = (TextView) findViewById(R.id.main_tips);
 
         findViewById(R.id.btnSettings).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,7 +99,8 @@ public class RobotActivity extends Activity {
                             @Override
                             public void run() {
                                 Log.i("测试", "turn left >>>>\n");
-                                motor.turn_left_forward();
+                                if (checkDistance())
+                                    motor.turn_left_forward();
                             }
                         };
                         runnable.run();
@@ -87,7 +134,8 @@ public class RobotActivity extends Activity {
                             @Override
                             public void run() {
                                 Log.i("测试", "turn right >>>>\n");
-                                motor.turn_right_forward();
+                                if (checkDistance())
+                                    motor.turn_right_forward();
                             }
                         };
                         runnable.run();
@@ -137,7 +185,8 @@ public class RobotActivity extends Activity {
                             @Override
                             public void run() {
                                 Log.i("测试", "forward >>>>\n");
-                                motor.forward();
+                                if (checkDistance())
+                                    motor.forward();
                             }
                         };
                         runnable.run();
@@ -170,7 +219,8 @@ public class RobotActivity extends Activity {
                             @Override
                             public void run() {
                                 Log.i("测试", "backward >>>>\n");
-                                motor.backward();
+                                if (checkDistance())
+                                    motor.backward();
                             }
                         };
                         runnable.run();
@@ -201,10 +251,10 @@ public class RobotActivity extends Activity {
                     @Override
                     public void run() {
                         Log.i("测试", "webcam left >>>>\n");
-                        if (!stepMotorIsInited) {
-                            stepMotor.setup(8, 11, 25, 7, 0.01, 20);
-                            stepMotorIsInited = true;
-                        }
+//                        if (!stepMotorIsInited) {
+                        stepMotor.setup(8, 11, 25, 7, 0.01, 20);
+//                            stepMotorIsInited = true;
+//                        }
                         stepMotor.left();
                     }
                 };
@@ -222,10 +272,10 @@ public class RobotActivity extends Activity {
                     @Override
                     public void run() {
                         Log.i("测试", "webcam right >>>>\n");
-                        if (!stepMotorIsInited) {
-                            stepMotor.setup(8, 11, 25, 7, 0.01, 20);
-                            stepMotorIsInited = true;
-                        }
+//                        if (!stepMotorIsInited) {
+                        stepMotor.setup(8, 11, 25, 7, 0.01, 20);
+//                            stepMotorIsInited = true;
+//                        }
                         stepMotor.right();
                     }
                 };
@@ -240,6 +290,8 @@ public class RobotActivity extends Activity {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
+
+//        new Thread(new ThreadShow()).start();
 
     }
 
