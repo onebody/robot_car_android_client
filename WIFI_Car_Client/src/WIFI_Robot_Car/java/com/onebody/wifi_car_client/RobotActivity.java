@@ -16,8 +16,6 @@ import com.onebody.wifi_car_client.webiopi_util.RangingSensorAPI;
 import com.onebody.wifi_car_client.webiopi_util.RobotMotorAPI;
 import com.onebody.wifi_car_client.webiopi_util.StepMotorAPI;
 
-import java.text.SimpleDateFormat;
-
 public class RobotActivity extends Activity {
     private RobotMotorAPI motor = new RobotMotorAPI();
     private StepMotorAPI stepMotor = new StepMotorAPI();
@@ -52,7 +50,7 @@ public class RobotActivity extends Activity {
     }
 
     private boolean checkDistance() {
-        double beforeDistance = rangingSensor.beforeDistance();
+/*        double beforeDistance = rangingSensor.beforeDistance();
         double afterDistance = rangingSensor.afterDistance();
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
@@ -67,7 +65,7 @@ public class RobotActivity extends Activity {
         if (beforeDistance < 30 || afterDistance < 30) {
             motor.stop();
             return false;
-        }
+        }*/
         return true;
     }
 
@@ -100,7 +98,8 @@ public class RobotActivity extends Activity {
                             public void run() {
                                 Log.i("测试", "turn left >>>>\n");
                                 if (checkDistance())
-                                    motor.turn_left_forward();
+                                    HttpRequest.sendGet("", "action=t_l");
+//                                    motor.turn_left_forward();
                             }
                         };
                         runnable.run();
@@ -111,7 +110,8 @@ public class RobotActivity extends Activity {
                             @Override
                             public void run() {
                                 Log.i("测试", "stop >>>>\n");
-                                motor.stop();
+//                                motor.stop();
+                                HttpRequest.sendGet("", "action=stop");
                             }
                         };
                         runnable.run();
@@ -135,7 +135,8 @@ public class RobotActivity extends Activity {
                             public void run() {
                                 Log.i("测试", "turn right >>>>\n");
                                 if (checkDistance())
-                                    motor.turn_right_forward();
+                                    HttpRequest.sendGet("", "action=t_r");
+//                                    motor.turn_right_forward();
                             }
                         };
                         runnable.run();
@@ -146,7 +147,7 @@ public class RobotActivity extends Activity {
                             @Override
                             public void run() {
                                 Log.i("测试", "stop >>>>\n");
-                                motor.stop();
+//                                motor.stop();
                             }
                         };
                         runnable.run();
@@ -165,7 +166,9 @@ public class RobotActivity extends Activity {
                     @Override
                     public void run() {
                         Log.i("测试", "auto  >>>>\n");
-                        motor.auto();
+//                        motor.auto();
+                        HttpRequest.sendGet("", "action=t_m");
+                        HttpRequest.sendGet("", "action=pt_m");
                     }
                 };
                 runnable.run();
@@ -186,7 +189,8 @@ public class RobotActivity extends Activity {
                             public void run() {
                                 Log.i("测试", "forward >>>>\n");
                                 if (checkDistance())
-                                    motor.forward();
+                                    HttpRequest.sendGet("", "action=go");
+//                                    motor.forward();
                             }
                         };
                         runnable.run();
@@ -197,7 +201,8 @@ public class RobotActivity extends Activity {
                             @Override
                             public void run() {
                                 Log.i("测试", "stop >>>>\n");
-                                motor.stop();
+//                                motor.stop();
+                                HttpRequest.sendGet("", "action=stop");
                             }
                         };
                         runnable.run();
@@ -220,7 +225,8 @@ public class RobotActivity extends Activity {
                             public void run() {
                                 Log.i("测试", "backward >>>>\n");
                                 if (checkDistance())
-                                    motor.backward();
+                                    HttpRequest.sendGet("", "action=back");
+//                                    motor.backward();
                             }
                         };
                         runnable.run();
@@ -231,7 +237,8 @@ public class RobotActivity extends Activity {
                             @Override
                             public void run() {
                                 Log.i("测试", "stop >>>>\n");
-                                motor.stop();
+//                                motor.stop();
+                                HttpRequest.sendGet("", "action=stop");
                             }
                         };
                         runnable.run();
@@ -252,10 +259,11 @@ public class RobotActivity extends Activity {
                     public void run() {
                         Log.i("测试", "webcam left >>>>\n");
 //                        if (!stepMotorIsInited) {
-                        stepMotor.setup(8, 11, 25, 7, 0.01, 20);
+//                        stepMotor.setup(8, 11, 25, 7, 0.01, 20);
 //                            stepMotorIsInited = true;
 //                        }
-                        stepMotor.left();
+//                        stepMotor.left();
+                        HttpRequest.sendGet("", "action=pt_l");
                     }
                 };
                 runnable.run();
@@ -273,12 +281,14 @@ public class RobotActivity extends Activity {
                     public void run() {
                         Log.i("测试", "webcam right >>>>\n");
 //                        if (!stepMotorIsInited) {
-                        stepMotor.setup(8, 11, 25, 7, 0.01, 20);
+//                        stepMotor.setup(8, 11, 25, 7, 0.01, 20);
 //                            stepMotorIsInited = true;
 //                        }
-                        stepMotor.right();
+//                        stepMotor.right();
+                        HttpRequest.sendGet("", "action=pt_r");
                     }
                 };
+
                 runnable.run();
             }
         }

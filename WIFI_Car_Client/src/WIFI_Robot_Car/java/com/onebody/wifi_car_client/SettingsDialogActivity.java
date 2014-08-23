@@ -11,8 +11,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.onebody.wifi_car_client.webiopi_util.WebIOPI_Util;
-
 
 public class SettingsDialogActivity extends Activity {
     /**
@@ -23,11 +21,12 @@ public class SettingsDialogActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings_dialog);
         EditText txtServer = (EditText) findViewById(R.id.txtServer);
-        txtServer.setText(WebIOPI_Util.webiopi_server);
-        EditText txtUser = (EditText) findViewById(R.id.user);
-        txtUser.setText(WebIOPI_Util.webiopi_username);
-        EditText txtPassword = (EditText) findViewById(R.id.password);
-        txtPassword.setText(WebIOPI_Util.webiopi_password);
+//        txtServer.setText(WebIOPI_Util.webiopi_server);
+        txtServer.setText(HttpRequest.serverHost);
+//        EditText txtUser = (EditText) findViewById(R.id.user);
+//        txtUser.setText(WebIOPI_Util.webiopi_username);
+//        EditText txtPassword = (EditText) findViewById(R.id.password);
+//        txtPassword.setText(WebIOPI_Util.webiopi_password);
         showDialog(0);
     }
 
@@ -51,7 +50,8 @@ public class SettingsDialogActivity extends Activity {
 
                 EditText txtPassword = (EditText) findViewById(R.id.password);
                 String password = txtPassword.getText().toString();
-                WebIOPI_Util.getGPIO(hostIP, userName, password);
+//                WebIOPI_Util.getGPIO(hostIP, userName, password);
+                HttpRequest.serverHost = hostIP + ":9999/robot_api";
 
                 Toast.makeText(SettingsDialogActivity.this, "登录成功", Toast.LENGTH_LONG).show();
 
