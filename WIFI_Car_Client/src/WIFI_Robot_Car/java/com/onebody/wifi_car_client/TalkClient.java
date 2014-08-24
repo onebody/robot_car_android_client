@@ -9,7 +9,7 @@ import java.net.Socket;
 public class TalkClient {
     public static void main(String args[]) {
         try {
-            Socket socket = new Socket("127.0.0.1", 4700);
+            Socket socket = new Socket("192.168.1.104", 47788);
             //向本机的4700端口发出客户请求
             BufferedReader sin = new BufferedReader(new InputStreamReader(System.in));
             //由系统标准输入设备构造BufferedReader对象

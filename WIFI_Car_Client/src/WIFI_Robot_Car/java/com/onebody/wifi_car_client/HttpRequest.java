@@ -20,6 +20,12 @@ public class HttpRequest {
      * @return URL 所代表远程资源的响应结果
      */
     public static String sendGet(String url, String param) {
+
+        //TODO socket 方式调用
+      /*  String s = param.replace("action=", "").replace("\n", "");
+        SocketUtil.exec(s);
+        return "";*/
+
         String result = "";
         BufferedReader in = null;
         try {
@@ -120,11 +126,24 @@ public class HttpRequest {
         return result;
     }
 
+    public static void main(String args[]) {
+        try {
+            BufferedReader sin = new BufferedReader(new InputStreamReader(System.in));
+            //由系统标准输入设备构造BufferedReader对象
+            String readline;
+            readline = sin.readLine(); //从系统标准输入读入一字符串
+            while (!readline.equals("bye")) {
+                String s = HttpRequest.sendGet("http://192.168.1.104:9999/robot_api", "action=" + readline);
+                System.out.println(s);
+                readline = sin.readLine(); //从系统标准输入读入一字符串
+            }
+        } catch (Exception e) {
+            System.out.println("Error" + e); //出错，则打印出错信息
+        }
 
-    public static void main(String[] args) {
-        //发送 GET 请求
+       /* //发送 GET 请求
         String s = HttpRequest.sendGet("http://192.168.1.104:9999/robot_api", "action=t_m");
-        System.out.println(s);
+        System.out.println(s);*/
 
 //        //发送 POST 请求
 //        String sr = HttpRequest.sendPost("http://localhost:6144/Home/RequestPostString", "key=123&v=456");
