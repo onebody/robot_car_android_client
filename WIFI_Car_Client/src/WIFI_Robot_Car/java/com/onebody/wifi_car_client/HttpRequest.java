@@ -12,6 +12,18 @@ import java.util.Map;
 public class HttpRequest {
     public static String serverHost = "http://192.168.1.104:9999/robot_api";
 
+
+    /**
+     * 向指定URL发送GET方法的请求
+     *
+     * @param param 请求参数，请求参数应该是 name1=value1&name2=value2 的形式。
+     * @return URL 所代表远程资源的响应结果
+     */
+    public static String sendGet(String param) {
+        return sendGet(serverHost, param);
+    }
+
+
     /**
      * 向指定URL发送GET方法的请求
      *
@@ -20,16 +32,10 @@ public class HttpRequest {
      * @return URL 所代表远程资源的响应结果
      */
     public static String sendGet(String url, String param) {
-
-        //TODO socket 方式调用
-      /*  String s = param.replace("action=", "").replace("\n", "");
-        SocketUtil.exec(s);
-        return "";*/
-
         String result = "";
         BufferedReader in = null;
         try {
-            String urlNameString = serverHost + "?" + param;
+            String urlNameString = url + "?" + param;
             URL realUrl = new URL(urlNameString);
             // 打开和URL之间的连接
             URLConnection connection = realUrl.openConnection();
@@ -68,6 +74,17 @@ public class HttpRequest {
             }
         }
         return result;
+    }
+
+    /**
+     * 向指定 URL 发送POST方法的请求
+     *
+     * @param param 请求参数，请求参数应该是 name1=value1&name2=value2 的形式。
+     * @return 所代表远程资源的响应结果
+     */
+    public static String sendPost(String param) {
+        return sendPost(serverHost, param);
+
     }
 
     /**

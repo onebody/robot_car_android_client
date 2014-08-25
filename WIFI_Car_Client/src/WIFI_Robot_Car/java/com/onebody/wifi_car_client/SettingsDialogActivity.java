@@ -22,7 +22,7 @@ public class SettingsDialogActivity extends Activity {
         setContentView(R.layout.activity_settings_dialog);
         EditText txtServer = (EditText) findViewById(R.id.txtServer);
 //        txtServer.setText(WebIOPI_Util.webiopi_server);
-        txtServer.setText(HttpRequest.serverHost);
+        txtServer.setText(SocketUtil.HOST);
 //        EditText txtUser = (EditText) findViewById(R.id.user);
 //        txtUser.setText(WebIOPI_Util.webiopi_username);
 //        EditText txtPassword = (EditText) findViewById(R.id.password);
@@ -51,7 +51,8 @@ public class SettingsDialogActivity extends Activity {
                 EditText txtPassword = (EditText) findViewById(R.id.password);
                 String password = txtPassword.getText().toString();
 //                WebIOPI_Util.getGPIO(hostIP, userName, password);
-                HttpRequest.serverHost = hostIP + ":9999/robot_api";
+//                HttpRequest.serverHost = hostIP + ":9999/robot_api";
+                SocketUtil.HOST = hostIP;
 
                 Toast.makeText(SettingsDialogActivity.this, "登录成功", Toast.LENGTH_LONG).show();
 

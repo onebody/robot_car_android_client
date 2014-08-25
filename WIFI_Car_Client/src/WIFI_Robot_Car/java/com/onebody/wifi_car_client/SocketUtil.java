@@ -7,12 +7,15 @@ import java.io.PrintWriter;
 import java.net.Socket;
 
 /**
- * Created by wd7 on 14-8-25.
+ * Sockect 操作类
  */
 public class SocketUtil {
+    public static String HOST = "192.168.1.104";
+    public static int PORT = 47788;
+
     public static void exec(String code) {
         try {
-            Socket socket = new Socket("192.168.1.104", 47788);
+            Socket socket = new Socket(HOST, PORT);
             //向本机的4700端口发出客户请求
             PrintWriter os = new PrintWriter(socket.getOutputStream());
             //由Socket对象得到输出流，并构造PrintWriter对象
@@ -23,9 +26,9 @@ public class SocketUtil {
             //将从系统标准输入读入的字符串输出到Server
             os.flush();
             //刷新输出流，使Server马上收到该字符串
-            System.out.println("Client:" + code);
+//            System.out.println("Client:" + code);
             //在系统标准输出上打印读入的字符串
-            System.out.println("Server:" + is.readLine());
+//            System.out.println("Server:" + is.readLine());
             //从Server读入一字符串，并打印到标准输出上
             os.close(); //关闭Socket输出流
             is.close(); //关闭Socket输入流
@@ -37,7 +40,7 @@ public class SocketUtil {
 
     public static void singleConn(String args[]) {
         try {
-            Socket socket = new Socket("192.168.1.104", 47788);
+            Socket socket = new Socket(HOST, PORT);
             //向本机的4700端口发出客户请求
             BufferedReader sin = new BufferedReader(new InputStreamReader(System.in));
             //由系统标准输入设备构造BufferedReader对象
@@ -70,7 +73,10 @@ public class SocketUtil {
 
 
     public static void main(String args[]) {
+//        长连接方式
 //        SocketUtil.singleConn(args);
+
+        // 短连接方式
         mConn();
     }
 

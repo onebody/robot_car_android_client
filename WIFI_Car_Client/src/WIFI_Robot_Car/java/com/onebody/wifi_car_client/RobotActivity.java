@@ -98,7 +98,7 @@ public class RobotActivity extends Activity {
                             public void run() {
                                 Log.i("测试", "turn left >>>>\n");
                                 if (checkDistance())
-                                    HttpRequest.sendGet("", "action=t_l");
+                                    RobotUtil.process("t_l");
 //                                    motor.turn_left_forward();
                             }
                         };
@@ -111,7 +111,7 @@ public class RobotActivity extends Activity {
                             public void run() {
                                 Log.i("测试", "stop >>>>\n");
 //                                motor.stop();
-                                HttpRequest.sendGet("", "action=stop");
+                                RobotUtil.process("stop");
                             }
                         };
                         runnable.run();
@@ -135,7 +135,7 @@ public class RobotActivity extends Activity {
                             public void run() {
                                 Log.i("测试", "turn right >>>>\n");
                                 if (checkDistance())
-                                    HttpRequest.sendGet("", "action=t_r");
+                                    RobotUtil.process("t_r");
 //                                    motor.turn_right_forward();
                             }
                         };
@@ -167,8 +167,8 @@ public class RobotActivity extends Activity {
                     public void run() {
                         Log.i("测试", "auto  >>>>\n");
 //                        motor.auto();
-                        HttpRequest.sendGet("", "action=t_m");
-                        HttpRequest.sendGet("", "action=pt_m");
+                        RobotUtil.process("t_m");
+                        RobotUtil.process("pt_m");
                     }
                 };
                 runnable.run();
@@ -189,7 +189,7 @@ public class RobotActivity extends Activity {
                             public void run() {
                                 Log.i("测试", "forward >>>>\n");
                                 if (checkDistance())
-                                    HttpRequest.sendGet("", "action=go");
+                                    RobotUtil.process("go");
 //                                    motor.forward();
                             }
                         };
@@ -202,7 +202,7 @@ public class RobotActivity extends Activity {
                             public void run() {
                                 Log.i("测试", "stop >>>>\n");
 //                                motor.stop();
-                                HttpRequest.sendGet("", "action=stop");
+                                RobotUtil.process("stop");
                             }
                         };
                         runnable.run();
@@ -225,7 +225,7 @@ public class RobotActivity extends Activity {
                             public void run() {
                                 Log.i("测试", "backward >>>>\n");
                                 if (checkDistance())
-                                    HttpRequest.sendGet("", "action=back");
+                                    RobotUtil.process("back");
 //                                    motor.backward();
                             }
                         };
@@ -238,7 +238,7 @@ public class RobotActivity extends Activity {
                             public void run() {
                                 Log.i("测试", "stop >>>>\n");
 //                                motor.stop();
-                                HttpRequest.sendGet("", "action=stop");
+                                RobotUtil.process("stop");
                             }
                         };
                         runnable.run();
@@ -263,7 +263,7 @@ public class RobotActivity extends Activity {
 //                            stepMotorIsInited = true;
 //                        }
 //                        stepMotor.left();
-                        HttpRequest.sendGet("", "action=pt_l");
+                        RobotUtil.process("pt_l");
                     }
                 };
                 runnable.run();
@@ -285,7 +285,7 @@ public class RobotActivity extends Activity {
 //                            stepMotorIsInited = true;
 //                        }
 //                        stepMotor.right();
-                        HttpRequest.sendGet("", "action=pt_r");
+                        RobotUtil.process("pt_r");
                     }
                 };
 
