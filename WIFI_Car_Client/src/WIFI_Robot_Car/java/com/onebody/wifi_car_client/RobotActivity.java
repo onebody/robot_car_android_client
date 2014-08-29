@@ -148,6 +148,7 @@ public class RobotActivity extends Activity {
                             public void run() {
                                 Log.i("测试", "stop >>>>\n");
 //                                motor.stop();
+                                RobotUtil.process("stop");
                             }
                         };
                         runnable.run();
@@ -159,7 +160,7 @@ public class RobotActivity extends Activity {
 
         );
 
-        findViewById(R.id.btn_auto_robot).setOnClickListener(new View.OnClickListener() {
+   /*     findViewById(R.id.btn_auto_robot).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Runnable runnable = new Runnable() {
@@ -176,7 +177,43 @@ public class RobotActivity extends Activity {
 
         }
 
+        );*/
+
+        findViewById(R.id.btn_auto_robot).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                switch (motionEvent.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        //按下
+                        Runnable runnable = new Runnable() {
+                            @Override
+                            public void run() {
+                                Log.i("测试", " >>>>\n");
+                                RobotUtil.process("t_m");
+                                RobotUtil.process("pt_m");
+                            }
+                        };
+                        runnable.run();
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        //弹起
+                        runnable = new Runnable() {
+                            @Override
+                            public void run() {
+                                Log.i("测试", "stop >>>>\n");
+//                                motor.stop();
+                                RobotUtil.process("stop");
+                            }
+                        };
+                        runnable.run();
+                        break;
+                }
+                return true;
+            }
+        }
+
         );
+
 
         findViewById(R.id.btn_motor_up).setOnTouchListener(new View.OnTouchListener() {
             @Override
